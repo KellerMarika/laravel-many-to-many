@@ -39,7 +39,7 @@ class StoreProjectRequest extends FormRequest
             'description' => 'string',
             'github_link' => 'string',
             /*  */
-            'languages' => 'exists:languages,id|array'
+            'tecnologies' => 'exists:tecnologies,id|array'
         ];
     }
 }

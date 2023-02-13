@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\UpdateProjectRequest;
 
 use App\Models\Level;
 use App\Models\Project;
+use App\Models\Tecnology;
 use App\Models\Type;
 
 use Illuminate\Http\Request;
@@ -29,9 +30,10 @@ class ProjectController extends Controller
         $projects = Project::all();
         $levels = Level::all();
         $types = Type::all();
+        $tecnologies = Tecnology::all();
 
 
-        return view('admin.projects.index', compact("projects", 'levels', 'types'));
+        return view('admin.projects.index', compact("projects", 'levels', 'types', "tecnologies"));
 
     }
 
@@ -44,8 +46,8 @@ class ProjectController extends Controller
     {
         $levels = Level::all();
         $types = Type::all();
-
-        return view('admin.projects.create', compact('levels', 'types'));
+        $tecnologies = Tecnology::all();
+        return view('admin.projects.create', compact('levels', 'types', "tecnologies"));
     }
 
     /**
@@ -56,6 +58,7 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
+       
         /* 
         usa le rules dello store project request per validare la creazione dell'elemento */
 
@@ -73,6 +76,12 @@ class ProjectController extends Controller
             'cover_img' => $path ?? '', /* lo faccio a monitor di mettere un'immagine di default senno salverei sempre cover_img 404 nf nel db */
         ]);
 
+        /* per aggiungere alla tabella ponte la relazione tra progetto e tecnologie */
+
+        if ($request->has("tecnologies")) {
+            // if (key_exists("tecnologies", $data)) {
+            $project->tecnologies()->attach($data["tecnologies"]);
+        }
 
         return redirect()->route('admin.projects.show', $project->id);
 
@@ -104,7 +113,8 @@ class ProjectController extends Controller
     {
         $levels = Level::all();
         $types = Type::all();
-        return view("admin.projects.edit", compact("project", "levels", "types"));
+        $tecnologies = Tecnology::all();
+        return view("admin.projects.edit", compact("project", "levels", "types", "tecnologies"));
     }
 
     /**
@@ -135,7 +145,7 @@ class ProjectController extends Controller
            'message'=>'hai creato un nuovo progetto: #'. $project->id
            ]) */
 
-           /* quando aggiorno */
+        /* quando aggiorno */
         $project->languages()->attach($data['tags']);
     }
 
