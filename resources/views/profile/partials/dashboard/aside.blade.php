@@ -5,7 +5,7 @@
 
             {{-- HOME NO --}}
 
-                 <li class="list w-100 ">
+                 <li id="home " class="list w-100 ">
                 <b></b>
                 <b></b>
                 <a class="p-relative w-100 text-decoration-none " href="#">
@@ -38,7 +38,7 @@
                     </a>
                 </li>
 
-                <li id="projects" class="list w-100 ">
+                <li id="portfolio" class="list w-100 ">
                     <b></b>
                     <b></b>
                     <a  class="p-relative w-100 text-decoration-none " href="#">
@@ -113,7 +113,6 @@
 
 
     {{-- icone --}}
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 
     {{-- ho grossomodo capito ma --}}
     {{--     <script type="text/javascript">
