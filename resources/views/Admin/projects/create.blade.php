@@ -27,7 +27,7 @@
             @csrf
 
             {{-- title --}}
-            <div class="input-container pb-2 col-12 col-md-6">
+            <div class="input-container pb-2 col-12 col-md-5">
                 <label class="form-label">TITOLO</label>
                 <input type="text"
                     class="form-control 
@@ -42,8 +42,9 @@
             </div>
 
 
+
             {{-- type --}}
-            <div class="input-container pb-2 col-12 col-md-4">
+            <div class="input-container pb-2 col-12 col-md-3">
                 <label class="form-label" for="type_id">Tipologia</label>
                 <select
                     class="form-control
@@ -51,7 +52,8 @@
                     id="type_id" name="type_id">
 
                     @foreach ($types as $type)
-                        <option value="{{ $type->id }}" {{ old('type_id') ? 'selected' : '' }}>{{ $type->name }}</option>
+                        <option value="{{ $type->id }}" {{ old('type_id') ? 'selected' : '' }}>{{ $type->name }}
+                        </option>
                     @endforeach
 
                 </select>
@@ -62,7 +64,29 @@
                 @enderror
             </div>
 
-            {{-- checkbox --}}
+            {{-- level_id --}}
+            <div class="input-container pb-2 col-12 col-md-2">
+                <label class="form-label" for="level_id">Difficoltà</label>
+                <select
+                    class="form-control
+            @error('level_id') is-invalid @elseif(old('level_id')) is-valid @enderror"
+                    id="level_id" name="level_id">
+
+                    @foreach ($levels as $level)
+                        <option value="{{ $level->id }}" {{ old('level_id') ? 'selected' : '' }}>{{ $level->name }}
+                        </option>
+                    @endforeach
+
+
+                </select>
+                @error('level_id')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @elseif(old('level_id'))
+                    <div class="valid-feedback">ok </div>
+                @enderror
+            </div>
+
+            {{-- completed --}}
             <div class="input-container pb-2 col-12  col-sm-4 col-md-2 ps-3">
                 <div class="form-check form-switch p-0">
 
@@ -85,45 +109,33 @@
                 @enderror
             </div>
 
+
             {{-- linguaggi --}}
-            <div class="input-container pb-2 col-12 col-md-8 ">
-                <label class="form-label">linguaggi</label>
-                <input type="text"
-                    class="form-control 
-        @error('languages') is-invalid @elseif(old('languages')) is-valid @enderror"
-                    name="languages" value="{{ $errors->has('languages') ? '' : old('languages') }}">
 
-                @error('languages')
+            <div class="input-container pb-2 col-12 ">
+                <label class="form-label text-uppercase">Tecnologie:</label> <br>
+
+                @foreach ($tecnologies as $tecnology)
+                    <input type="checkbox" 
+                    class="form-check-input    @error('tecnologies') is-invalid @enderror"
+        
+                        id="tecnology_{{ $loop->index }}"
+                        value="{{ $tecnology->id }}"
+                        name="tecnologies[]"
+                    
+                        {{ in_array($tecnology->id, old('tecnologies', [])) ? 'checked' : '' }}>
+
+                    <label class="form-check form-check-inline @error('tecnologies') is-invalid @enderror"
+                        for="tecnology_{{ $loop->index }}"
+                        >{{ $tecnology->name }}</label>
+                @endforeach
+
+                @error('tecnologies')
                     <div class="invalid-feedback">{{ $message }}</div>
-                @elseif(old('languages'))
+                @elseif(old('tecnologies'))
                     <div class="valid-feedback">ok </div>
                 @enderror
             </div>
-
-            {{-- level_id --}}
-            <div class="input-container pb-2 col-12 col-md-4">
-                <label class="form-label" for="level_id">Difficoltà</label>
-                <select
-                    class="form-control
-                    @error('level_id') is-invalid @elseif(old('level_id')) is-valid @enderror"
-                    id="level_id" name="level_id">
-
-                    @foreach ($levels as $level)
-                        <option value="{{ $level->id }}" {{ old('level_id') ? 'selected' : '' }}>{{ $level->name }}
-                        </option>
-                    @endforeach
-
-
-                </select>
-                @error('level_id')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @elseif(old('level_id'))
-                    <div class="valid-feedback">ok </div>
-                @enderror
-            </div>
-
-
-
 
 
             {{-- cover_img --}}

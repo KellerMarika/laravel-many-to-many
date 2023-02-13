@@ -11,7 +11,7 @@
 @dump($project) --}}
 <section>
     <div class="projects-index container">
-        <h2>All projects:</h2>
+        <h2>SHOW projects:</h2>
         <div class="row ">
 
             <div class="col-md-9 ">
@@ -20,7 +20,7 @@
                         class="card-id position-absolute rounded-circle d-flex justify-content-center align-items-center fs-3 fw-bold m-1 end-0 top-0 me-2">
                         {{ $project->id }}</div>
 
-                        <img src="{{ asset('storage/' . $project->cover_img) }}" class="card-img"
+                    <img src="{{ asset('storage/' . $project->cover_img) }}" class="card-img"
                         alt="{{ $project->cover_img }}">
                     <div class="card-body ">
 
@@ -35,7 +35,8 @@
 
                             </div>
 
-
+                            <small class="tecnology fw-bold text-end"> tecnologie Impiegte =>
+                                {{ $project->tecnologies->isEmpty() ? 'nessun risultato' : $project->tecnologies->implode('name', ', ') }}</small>
                             <p class="card-text pt-3">{{ $project->description }}<small
                                     class="d-block text-end p-1 border-top">last update:
                                     {{ $project->updated_at }}</small></p>
@@ -44,6 +45,12 @@
                             <a href="#" class="btn mr-2"><i class="fas fa-link"></i> leave Comment!</a>
                             <a href="{{ $project->github_link }}" class="btn "><i class="fab fa-github"></i>
                                 Github</a>
+
+                            @php
+                                $route = 'admin.projects.destroy';
+                                $element_id = $project->id;
+                            @endphp
+                            @include('profile.partials.destroy-btn', ['route', 'element_id'])
                         </div>
 
                     </div>
