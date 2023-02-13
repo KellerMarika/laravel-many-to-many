@@ -212,16 +212,46 @@ nav {
 
    background: linear-gradient(180deg, $secondary_color, desaturate($secondary_color_light, 15%), saturate(white, 10%));
 
-   /* ASIDE */
 
+   /* MAIN ***********************/
    main {
       margin-left: 90px;
       width: 100%;
       background: $secondary_color;
-      border: 1px solid red;
+
+
+      .portfolio {
+         .container * {
+            border: 1px solid red;
+
+            .card {
+               aspect-ratio: 16/9;
+               position: relative;
+
+               &.projects {
+                  background: linear-gradient(270deg, $primary_color, desaturate($primary_color_light, 15%), lighten(saturate($primary_color_light, 5%), 10%));
+                  color: $light_color;
+               }
+
+               span.count {
+                  font-size: 3.5rem;
+               }
+
+               .card-icon {
+                  position: absolute;
+                  font-size: 7rem;
+                  opacity: .8;
+                  top: 0;
+                  right: 0;
+                  --ionicon-stroke-width: 5px;
+
+               }
+            }
+         }
+      }
    }
 
-
+   /* ASIDE ^^^^^^^^^^^^^^^^^^^^^*/
    aside.navigation {
 
       * {

@@ -64,7 +64,7 @@ class DashboardController extends Controller
       $cities = City::all();
 
       /* passo dati diversi alla stessa view a seconda che sia superadmin o no*/
-      return view('user.dashboard', compact('svgPaths', 'continents', 'request', 'user', 'account', 'userDetail', 'addres', 'projects', 'posts', 'votes', 'users'));
+      return view('user.dashboard', compact('svgPaths', 'continents', 'request', 'user', 'account', 'userDetail', 'addres', 'projects', 'posts', 'votes', 'users','tecnologies', 'types', 'levels'));
     } else {
       /* passo dati diversi alla stessa view a seconda che sia superadmin o no*/
       return view('user.dashboard', compact('user', 'account', 'userDetail', 'address', 'projects', 'posts', 'votes', 'users'));
