@@ -49,9 +49,9 @@ class Project extends Model
     {
         return $this->hasMany(Vote::class);
     }
-    public function languages()
+    public function tecnologies()
     {
-        return $this->belongsToMany(Language::class);
+        return $this->belongsToMany(Tecnology::class);
     }
 
 }
