@@ -140,13 +140,11 @@ class ProjectController extends Controller
             'cover_img' => $path ?? $project->cover_img /* lo faccio a monitor di mettere un'immagine di default senno salverei sempre cover_img 404 nf nel db */
         ]);
 
-        return redirect()->route('admin.projects.show', $project->id); /* ->with([
-           'status'=>'success',
-           'message'=>'hai creato un nuovo progetto: #'. $project->id
-           ]) */
+        $project->tecnologies()->sync($data['tecnologies']);
+        
+        return redirect()->route('admin.projects.show', $project->id); 
 
-        /* quando aggiorno */
-        $project->languages()->attach($data['tags']);
+       
     }
 
     /**
@@ -158,6 +156,8 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         Storage::delete($project->cover_img);
+
+        $project->tecnologies()->detach();
         $project->delete();
         return redirect()->route("admin.projects.index");
     }

@@ -34,8 +34,9 @@
                                 </small>
 
                             </div>
-           
-                            <small class="tecnology fw-bold text-end"> tecnologie Impiegte => {{($project->tecnologies->isEmpty())? 'nessun risultato': $project->tecnologies->implode("name", ", ") }}</small>
+
+                            <small class="tecnology fw-bold text-end"> tecnologie Impiegte =>
+                                {{ $project->tecnologies->isEmpty() ? 'nessun risultato' : $project->tecnologies->implode('name', ', ') }}</small>
                             <p class="card-text pt-3">{{ $project->description }}<small
                                     class="d-block text-end p-1 border-top">last update:
                                     {{ $project->updated_at }}</small></p>
@@ -44,6 +45,12 @@
                             <a href="#" class="btn mr-2"><i class="fas fa-link"></i> leave Comment!</a>
                             <a href="{{ $project->github_link }}" class="btn "><i class="fab fa-github"></i>
                                 Github</a>
+
+                            @php
+                                $route = 'admin.projects.destroy';
+                                $element_id = $project->id;
+                            @endphp
+                            @include('profile.partials.destroy-btn', ['route', 'element_id'])
                         </div>
 
                     </div>

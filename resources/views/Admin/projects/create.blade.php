@@ -135,10 +135,6 @@
                 @elseif(old('tecnologies'))
                     <div class="valid-feedback">ok </div>
                 @enderror
-
-
-
-
             </div>
 
 
