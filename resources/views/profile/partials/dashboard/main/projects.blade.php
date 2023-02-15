@@ -38,27 +38,90 @@
 
             </div>
         </div>
+
+
+        {{-- tecnologies --}}
         <div class="tecnologies mt-4 text-end">
             <h2 class="text-center">tecnologies</h2>
             <table class="table table-striped text-start">
                 <tr class="bg-primary ">
 
                     <th scope="col" class="text-light">name</th>
+                    <th scope="col"class="text-light">modify</th>
                     <th scope="col"class="text-light">projects were is employed</th>
                     <th scope="col"class="text-light">Handle</th>
                 </tr>
                 @foreach ($tecnologies as $tecnology)
                     <tr>
                         <td>{{ $tecnology->name }}</td>
+                        <td>
+
+                            <form class="row p-2" action="{{ route('admin.tecnologies.update', $tecnology->id) }}"
+                                method="POST" enctype="multipart/form-data">
+                                @method('PUT')
+                                @csrf
+
+                                <input type="text" class="form-control col @error('name') is-invalid @enderror"
+                                    id="tecnology_{{ $loop->index }}" value="{{ old('name', $tecnology->name) }}"
+                                    name="name">
+
+                                @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @elseif(old('name'))
+                                    <div class="valid-feedback">ok </div>
+                                @enderror
+                                <div class=" col d-flex">
+                                    <a href="{{ route('admin.dashboard') }}" class="btn btn-primary">Annulla</a>
+
+                                    <button class="btn btn-secondary">salva</button>
+
+                                    @php
+                                        $route = 'admin.tecnologies.destroy';
+                                        $element_id = $tecnology->id;
+                                    @endphp
+                                    @include('profile.partials.destroy-btn', ['route', 'element_id'])
+
+                                </div>
+                            </form>
+
+                        </td>
+
                         <td>{{ $tecnology->projects->count() }}</td>
                         <td>
-                        <a href=""><ion-icon class="btn btn-primary" name="create-outline"></ion-icon></a> 
-                        <a href=""><ion-icon  class="btn btn-primary" name="close-outline"></ion-icon></ion-icon></a> 
+
+                            <ion-icon class="btn btn-primary" name="create-outline"></ion-icon>
+
+
+                            <ion-icon class="btn btn-primary" name="close-outline"></ion-icon>
+                            </ion-icon>
+
                         </td>
                     </tr>
                 @endforeach
             </table>
+
+            <form class="row p-2" action="{{ route('admin.tecnologies.store', $tecnology->id) }}"
+             method="POST" enctype="multipart/form-data">
+             @csrf
+
+             <input type="text" class="form-control col @error('name') is-invalid @enderror"
+                 id="tecnology" value="{{ old('name', $tecnology->name) }}"
+                 name="name">
+
+             @error('name')
+                 <div class="invalid-feedback">{{ $message }}</div>
+             @elseif(old('name'))
+                 <div class="valid-feedback">ok </div>
+             @enderror
+             <div class=" col d-flex">
+                 <a href="{{ route('admin.dashboard') }}" class="btn btn-primary">Annulla</a>
+
+                 <button class="btn btn-secondary">salva</button>
+
+             </div>
+         </form>
             <button class="btn btn-primary ">add one +</button>
+            
         </div>
     </div>
     {{-- 

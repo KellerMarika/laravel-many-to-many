@@ -15,8 +15,10 @@ use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\RegionController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\TecnologyController;
 use App\Http\Controllers\Admin\UserDetailController;
 use App\Http\Controllers\Admin\VoteController;
+use App\Models\Tecnology;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,6 +52,7 @@ Route::middleware(['auth', 'verified'])
         Route::resource('projects', ProjectController::class);
         Route::resource('types', TypeController::class);
         Route::resource('levels', LevelController::class);
+        Route::resource('tecnologies', TecnologyController::class);
 
         /* rotte lato utente */
         Route::resource('accounts', AccountController::class);
