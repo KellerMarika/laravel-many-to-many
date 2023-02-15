@@ -71,12 +71,12 @@ class TecnologyController extends Controller
     public function update(Request $request, $id)
     {
         $tecnology = Tecnology::findOrFail($id);
-      /*   dd($tecnolgy); */
+        /*   dd($tecnolgy); */
         $data = $request->all();
 
         $tecnology->update($data);
 
-      /*   $tecnolgy->tecnologies()->sync($data['tecnologies']); */
+        /*   $tecnolgy->tecnologies()->sync($data['tecnologies']); */
 
         return redirect()->route('admin.dashboard');
     }
@@ -89,8 +89,8 @@ class TecnologyController extends Controller
      */
     public function destroy($id)
     {
-     $tecnology = Tecnology::findOrFail($id);
-     $tecnology->delete();
-     return redirect()->route("admin.dashboard");
+        $tecnology = Tecnology::findOrFail($id);
+        $tecnology->delete();
+        return redirect()->route("admin.dashboard");
     }
 }
