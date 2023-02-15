@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Tecnology;
 use Illuminate\Http\Request;
 
-class TypologyController extends Controller
+class TecnologyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -69,7 +70,15 @@ class TypologyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $tecnology = Tecnology::findOrFail($id);
+        /*   dd($tecnolgy); */
+        $data = $request->all();
+
+        $tecnology->update($data);
+
+        /*   $tecnolgy->tecnologies()->sync($data['tecnologies']); */
+
+        return redirect()->route('admin.dashboard');
     }
 
     /**
@@ -80,6 +89,8 @@ class TypologyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tecnology = Tecnology::findOrFail($id);
+        $tecnology->delete();
+        return redirect()->route("admin.dashboard");
     }
 }

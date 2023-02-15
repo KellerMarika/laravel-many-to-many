@@ -1,6 +1,6 @@
-@dump($route)
+{{-- @dump($route)
 @dump($element_id)
-
+ --}}
 
 <form  class="delete-form " action="{{ route($route, $element_id) }}" method="POST">
  @csrf()
